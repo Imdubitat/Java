@@ -12,7 +12,6 @@ public class Data {
     private String mesExtenso;
     private int ano;
 
-    //Construtor
     public Data(int dia, int mes, int ano) {
         if(ehDataValida(dia, mes, ano)){
             this.dia = dia;
@@ -26,17 +25,14 @@ public class Data {
         }
 }
 
-    //retorna o dia da data digitada
     public int getDia() {
         return dia;
     }
 
-    //retorna o mes da data digitada
     public int getMes() {
         return mes;
     }
 
-    //retorna o mes por extenso
     public String getMesExtenso() {
         Locale locale = new Locale("pt", "BR"); // pt para Português, BR para Brasil
         String mesExtenso = java.time.Month.of(mes).getDisplayName(TextStyle.FULL, locale);
@@ -44,12 +40,10 @@ public class Data {
         return mesExtenso;
     }
     
-    //retorna o ano da data digitada
     public int getAno() {
         return ano;
     }
     
-    //compara a data digitada com a data atual
     public int compara() {
         int anoAtual = java.time.LocalDate.now().getYear();
         int mesAtual = java.time.LocalDate.now().getMonthValue();
@@ -67,17 +61,15 @@ public class Data {
         }
     }
 
-    //verifica se o ano digitado eh bissexto
     public boolean isBissexto(int ano) {
        return (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
     }
     
-    //verifica se a data eh valida
     public boolean ehDataValida(int dia, int mes, int ano) {
-        boolean bissexto = (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
+        //boolean bissexto = (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
         int[] diasDosMeses = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-        if (bissexto) {
+        if (isBissexto(ano)) {
             diasDosMeses[2] = 29;
         } else {
             diasDosMeses[2] = 28;
@@ -91,7 +83,6 @@ public class Data {
         return false; // A data é inválida
     }
     
-    //faz um clone da data digitada
     @Override
     public Data clone() {
         return new Data(this.dia, this.mes, this.ano);
